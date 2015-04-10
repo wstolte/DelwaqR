@@ -1,0 +1,17 @@
+{
+    "contents" : "## nu even zo, moet uit package komen\nsource(\"R/io.R\")\nsource(\"R/plotfunctions.r\")\n\nworkdir <- \"d:\\\\MODELS\\\\ED\\\\\"\nmodversion = \"eco-scen4-run1-28-y2_2-day\"\n\nsavedir <- file.path(workdir, modversion)\ndir.create(savedir)\nmodarr <- his2arr(paste(workdir, modversion, \".his\", sep = \"\"))\n\n##===============================================\n## MAKE ECOPLOT DIAGRAMS\n##==============================================\n\nlimmod = c(\"Limit e\", \"Limit nit\", \"Limit pho\", \"Limit sil\")\n\n# locations = c(\"IM00\", \"IM01\", \"IM02\", \"IM03\",\n#               \"IM04\", \"IM05\", \"IM06\", \"IM07\",\n#               \"IM08\", \"IM09\", \"IM10\")\n# locations = \"WZ460_Wierumergronde\"\n# locations = c(\"A1\", \"A2\", \"A3\", \"A4\", \"A5\", \"A6\")\n# locations = c(\"EDB01\", \"EDB03\", \"EDB04\", \"EDB05\", \"EDB06\")\nlocations = c(\"WZ590_ZO_Lauwers_oos\", \"Ra\", \"Paap\", \"Huibertgat_oost\",\n              \"Bocht_van_Watum\", \"Groote_Gat_noord\", \"Nieuwe_Statenzijl_bu\")\n\nDelwaqEcoplot(arr = modarr, locmod = locations, submod = \"fPPtot\", limmod = limmod, plottype = 1)\nggsave(file.path(savedir, paste(format(Sys.Date(), \"%Y%m%d\"), plotname, \"ecoplot\", modversion, \".png\", sep = \"_\")),\n       width = 10, height = 8)\n\n\n",
+    "created" : 1423558035310.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3111519330",
+    "id" : "4EE7DD0A",
+    "lastKnownWriteTime" : 1425660612,
+    "path" : "D:/REPOS-CHECK-OUTS/OpenEarthTools/r/applications/Delft3D/DelwaqR/example_ecoplot.R",
+    "project_path" : "example_ecoplot.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

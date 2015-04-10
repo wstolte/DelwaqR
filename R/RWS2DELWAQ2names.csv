@@ -1,0 +1,125 @@
+Delwaq;RWS_DONAR_wnscod;RWS_DONAR_parcod_hdh;RWS_DONAR_parcod_hdh2;Delwaq_long_name;short_name;NLWKN_Eems;NLWKN_Eems_short;unit
+Time;;;;;time;ZEIT;ZEIT;
+Location;location;location;location;location;location;MESSTELLE;MESSTELLE;
+Date;datum;datum;datum;date;date;DATUM;DATUM;
+Continuity;;;;Continuity;;;;
+Salinity;;SALNTT;SALNTT NVT;Salinity;salinity;;;promille
+IM1;;;;IM1;;;;
+IM2;;;;IM2;;;;
+OXY;;O2;O2 NVT;oxygen;O2;O2_mg/l;O2;mg/l
+NH4;;NH4 Nnf;NH4 Nnf;ammonium;NH4;NH4_mgN/l;NH4;mgN/l
+NO3;;NO3 Nnf;NO3 Nnf;nitrate;NO3;NO3_mgN/l;NO3;mgN/l
+PO4;;PO4 Pnf;PO4 Pnf;phosphate;PO4;OPO4_mgP/l;OPO4;mgP/l
+AAP;;;;adsorbed phosphate;AAP;;;
+VIVP;;;;vivianite P;;;;
+APATP;;;;apatite P;;;;
+Si;;SiO2 Sinf;SiO2 Sinf;dissolved silicate;SiO2;;;
+Opal;;;;opal silicate;;;;
+SO4;;;;sulfate;SO4;;;
+SUD;;;;dissolved sulfide;;;;
+SUP;;;;particulate sulfide;;;;
+CH4;;;;methane;;;;
+POC1;;;;POC1 (fast);;;;
+POC2;;;;POC2 (fast);;;;
+POC3;;;;POC3 (slow);;;;
+POC4;;;;POC4 (slow);;;;
+DOC;;DOC nf;DOC nf;dissolved org C;DOC;DOC_mgC/l;DOC;mgC/l
+PON1;;;;PON1 (fast);;;;
+PON2;;;;PON2 (fast);;;;
+PON3;;;;PON3 (slow);;;;
+PON4;;;;PON4 (slow);;;;
+DON;;;;dissolved org N;;;;
+POP1;;;;POP1 (fast);;;;
+POP2;;;;POP2 (fast);;;;
+POP3;;;;POP3 (slow);;;;
+POP4;;;;POP4 (slow);;;;
+DOP;;;;dissolved org P;;;;
+POS1;;;;POS1;;;;
+POS2;;;;POS2;;;;
+POS3;;;;POS3;;;;
+POS4;;;;POS4;;;;
+DOS;;;;DOS;;;;
+MDIATOMS_E;;;;light_limited diatoms;;;;g C/l
+MDIATOMS_N;;;;nitrogen_limited diatoms;;;;g C/l
+MDIATOMS_P;;;;phosphorus_limited diatoms;;;;g C/l
+MFLAGELA_E;;;;light_limited flagellates;;;;g C/l
+MFLAGELA_N;;;;nitrogen_limited flagellates;;;;g C/l
+MFLAGELA_P;;;;phosphorus_limited flagellates;;;;g C/l
+PHAEOCYS_E;;;;light_limited Phaeocystis;;;;g C/l
+PHAEOCYS_N;;;;nitrogen_limited Phaeocystis;;;;g C/l
+PHAEOCYS_P;;;;phosphorus_limited Phaeocystis;;;;g C/l
+ULVAF_E;;;;light_limited benthic diatoms;;;;g C/m2
+ULVAF_N;;;;nitrogen_limited benthic diatoms;;;;g C/m2
+ULVAF_P;;;;phosphorus_limited benthic diatoms;;;;g C/m2
+ExtVl;;extinctie;E NVT;total extinction;E;;;/m
+ExtVlPhyt;;;;extinction by phytoplankton;;;;
+Temp;;T;T NVT;temperature;temp;TEMP_C;TEMP;degC
+Rad;;;;solar radiation;;;;
+Depth;;;;depth;;;;m
+BloomDepth;;;;BloomDepth;;;;
+DayL;;;;day length;;;;
+Phyt;;;;total phytoplankton biomass;;;;
+AlgN;;;;N in Algae;;;;
+AlgP;;;;P in Algae;;;;
+AlgSi;;;;Si in Algae;;;;
+AlgDM;;;;AlgDM;;;;
+Chlfa;;CHLFa;CHLFa NVT;chlorophyll-a;chlfa;CHLORO_A_?g/l;CHLORO_A;mg/m3
+Limit Chlo;;;;Limit Chlo;;;;
+Limit nit;;;;N_limitation;;;;
+Limit pho;;;;P_limitation;;;;
+Limit sil;;;;Si_limitation;;;;
+Limit e;;;;light_limitation;;;;
+Limit gro;;;;growth_limitation;;;;
+Limit mor;;;;mortality_limitation;;;;
+fPPtot;;;;total net primary production;;;;
+POCnoa;;;;POCnoa;;;;
+POMnoa;;;;POMnoa;;;;
+PONnoa;;;;PONnoa;;;;
+POPnoa;;;;POPnoa;;;;
+POSnoa;;;;POSnoa;;;;
+SS;;ZS;ZS NVT;suspended solids;SPM;SPM_mgTS/l;UNGST;mg/l
+TotN;;N;N NVT;TotN;TN;TN_mgN/l;GN;mgN/l
+DIN;;;;DIN;;;;
+TotP;;P;P NVT;TotP;TP;TP_mgP/l;GP;mgP/l
+SecchiDept;;ZICHT;ZICHT NVT;secchi depth;;;;
+SaturOXY;;;;saturation conc for oxygen;;;;
+TotalDepth;;;;total depth ;;;;
+RCREAR;;;;RCREAR;;;;
+BOD5;;;;BOD5;;;;
+ExtVlOSS;;;;extinction by dead organic matter;;;;
+ExtVlISS;;;;extinction by suspended inorganic matter;;;;
+RadSurf;;;;RadSurf;;;;
+RadBot;;;;RadBot;;;;
+DINOFLAG;;;;dinoflagellates;DINO;;;g C/l
+MDIATOMS;;;;diatoms;DIAT;;;g C/l
+MFLAGELA;;;;flagellates;FLAG;;;g C/l
+PHAEOCYS;;;;Phaeocystis spp.;PHAE;;;g C/l
+UlvaF;;;;benthic diatoms;;;;g C/m2
+SURF;;;;SURF;;;;
+LocalDepth;;;;LocalDepth;;;;m
+Theta;;;;Theta;;;;
+MOVING_pocketbox;;;;MOVING_pocketbox;;;;
+Poros;;;;Poros;;;;
+IM3;;;;IM3;;;;suspended inorganic matter
+TurCoef;;;;TurCoef;;;;
+DifCoef;;;;DifCoef;;;;
+ExtVlBak;;;;extinction by suspended inorganic matter;;;;extinction 
+PSedPOC1;;;;PSedPOC1;;;;
+TOC;;TOC;TOC NVT;TOC;TOC;TOC_mgC/l;TOC;mgC/l
+POC;;POC pg;POC pg;POC;;;;
+TOP;;;;TOP;;;;
+TON;;;;TON;;;;
+FrOxCon;;;;fraction oxygen;;;;
+FrNiDen;;;;fraction denitrification;;;;
+FrSuRed;;;;fraction sulfate reduction;;;;
+FrMetGen;;;;fraction methanogenesis;;;;
+DisSWK;;;;DisSWK;;;;
+pH;;;;pH;pH;PH_;;
+;;;;;;;;
+unknown;;;;;conductivity;Conductivity_?S/cm;;?S/cm
+unknown;;;;;phaeopigment;PHAEOPIG_?g/l;PHAEOPIG;?g/l
+unknown;;;;;BOD;BOD_mgO2/l;BOD;mgO2/l
+unknown;;;;;Cl;CL_mgCl/l;CL;mgCl/l
+unknown;;;;;SO4;SULFAT_mgSO4/l;SULFAT;mgSO4/l
+unknown;;;;;NO2;NO2_mgN/l;NO2;mgN/l
+unknown;;;;;HCO3;HCO3_mg/l;HCO3;mg/l

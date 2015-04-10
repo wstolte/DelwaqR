@@ -1,0 +1,16 @@
+{
+    "contents" : "saveseries <- function(plotdir, filename, locname, height, plottype) {\n  dev.off()\n  ggsave(file=paste(plotdir,\"/\", filename,\"_\",locname, plottype, \"_area\",\".png\",sep=\"\"),\n         width=10,height=height,dpi=300) \n}\n",
+    "created" : 1423212055561.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1834571601",
+    "id" : "977856D3",
+    "lastKnownWriteTime" : 1413362156,
+    "path" : "D:/REPOS-CHECK-OUTS/OpenEarthTools/r/applications/Delft3D/DelwaqR/R/save_plot.r",
+    "project_path" : "R/save_plot.r",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

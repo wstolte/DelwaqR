@@ -1,0 +1,16 @@
+{
+    "contents" : "library(shiny)\n\nload(file = \"d:/Tools_Scripts/R/ShinyMeetEems/MWTL_Eems_bewerkt.Rdata\")\n\n# Define the overall UI\n\nshinyUI(\n  fluidPage(\n    titlePanel(\"Metingen waterkwaliteit Eems-Dollard\"),\n    sidebarLayout(\n      # Define the sidebar with one input\n      sidebarPanel(width = 3,\n                   selectInput(\"location\", \"Location:\",\n                               choices = levels(rws_dat$locoms)),\n                   helpText(\"select location\"),\n                   selectInput(\"substance\", \"Substance:\",\n                               choices = levels(as.factor(rws_dat$variable))),\n                   helpText(\"select substance\"),\n                   plotOutput(\"map\", width = \"300px\", height = \"250px\")\n                   ),\n      # Create a spot for the plots\n      mainPanel(\n        fluidRow(\n          print(\"Onderstaande grafieken zijn samengesteld uit metingen gedaan door Rijkswaterstaat binnen het MWTL programma. De site is bedoeld als demonstratie, en conclusies aan de hand van de gepresenteerde data en analyse zijn voor rekening van de gebruiker\"),\n          print(\"Ruwe data zijn te downloaden op http://live.waterbase.nl\")\n          ),\n        fluidRow(\n          column(width = 4,\n                 plotOutput(\"timePlot\", width = \"400px\", height = \"350px\")\n#figuurtje invoegen modelled SPM vs fPP of Chla??\n                 ),\n          column(width = 4, offset = 2,\n                 plotOutput(\"boxPlot\", width = \"400px\", height = \"350px\")#,\n#                  plotOutput(\"map\", width = \"400px\", height = \"250px\")\n          )\n        ),\n        fluidRow(\n          column(width = 4,\n                 print(\"Tijdserie gefit met een lineaire regressie die rekening houdt met seizoensfluctuaties\"),\n                 print(\"y = a*x + b*cos(2*pi*x)+c*sin(2*pi*x)\")\n                 ),\n          column(width = 4, offset = 2,\n                 print(\"Boxplot van seizoensfluctuatie, samengesteld uit de tijdseriedata aan de linkerkant\")\n                 )\n          )\n      )\n    )\n  )\n)\n",
+    "created" : 1425305011822.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "100344936",
+    "id" : "96A1B0B5",
+    "lastKnownWriteTime" : 1425636832,
+    "path" : "D:/Tools_Scripts/R/ShinyMeetEems/ui.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

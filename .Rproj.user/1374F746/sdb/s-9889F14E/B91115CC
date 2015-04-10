@@ -1,0 +1,16 @@
+{
+    "contents" : "library(shiny)\nsetwd(\"d:/Tools_Scripts/R/ShinyMeetEems/\")\nrunApp()\n",
+    "created" : 1425311915812.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3824876540",
+    "id" : "B91115CC",
+    "lastKnownWriteTime" : 1425311964,
+    "path" : "D:/Tools_Scripts/R/ShinyMeetEems/start.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
