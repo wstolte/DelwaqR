@@ -24,7 +24,7 @@ plotstacked <- function(unit, locmod, submod, arr) {
 
   p <- ggplot(df.mod,aes(x=datetime,y=value))
   p + geom_area(aes(fill=species)) +
-    facet_grid(location~.) +
+    facet_grid(location ~.) +
     labs(title=paste("Model version: ",modversion),x="Date",y=paste(filename," (",unit,")",sep="")) +
     scale_x_datetime(labels = date_format("%b"),breaks=date_breaks("months"))
 }
@@ -50,8 +50,24 @@ saveseries <- function(plotdir, filename, locname, height) {
 #' @param limmod limiting factors to plot
 #' @param plottype 1-solid lines of varying thickness; 2- thick lines of varying transparancy
 #' @return A timeseries plot with variable and limiting factors
+#' @examples
+#' library(DelwaqR)
+#' arr <- his2arr(filename = "DATA/NZBLOOM.his", timestamp = F, begintime = "2003-01-01 00:00:00")
+#' dimnames(arr)
+#' submod <- c("Chlfa", "OXY")
+#' locmod <- c("NZR6NW020", "NZR9TS010")
+#' df <- arr2df(arr, locmod=locmod, submod=submod)
+#' df$value[df$variable == "fResptot"] <- -df$value[df$variable == "fResptot"]
+#' library(ggplot2)
+#' plot <- ggplot(df, aes(time, value))
+#' plot +
+#'   geom_line(aes(color = variable), size = 1) +
+#'   geom_point(aes(color = variable), fill = "white",  shape = 21, size = 4) +
+#'   facet_grid((. ~ location))
+#' limmod = c("Limit e", "Limit nit", "Limit pho", "Limit sil")
+#' DelwaqEcoplot(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
+#' DelwaqEcoplot2(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
 DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
-
   #   if () {
   #     stop("Argument invalid.")
   #   }
@@ -86,7 +102,9 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
   annotate.position.x <- as.POSIXct(as.numeric(min(df.lim$time)) - as.numeric(min(df.lim$time))/1200, origin = "1970-01-01 00:00:00")
 
   z = ggplot(aes(time, value), data = df.y)
-  z = z + geom_line(aes(), color = "grey20", size = 0.5) + facet_wrap( ~ location)
+  z = z + geom_line(aes(), color = "grey20", size = 0.5) +
+    facet_grid(variable ~ location)
+  # facet_wrap( ~ location)
   if(plottype == 1){
     z = z + geom_line(aes(x = time, y = step, color = limitation, size = value), data = df.lim)
   }
@@ -108,6 +126,9 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
   z
 }
 
+
+
+
 #' plot time series variable with limiting factors
 #' @param arr array with model results produced with \code{his2arr}
 #' @param locmod one or more locations
@@ -115,6 +136,23 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
 #' @param limmod limiting factors to plot
 #' @param plottype options: 1-solid lines of varying thickness; 2- thick lines of varying transparancy
 #' @return A timeseries plot with variable and limiting factors
+#' @examples
+#' library(DelwaqR)
+#' arr <- his2arr(filename = "DATA/NZBLOOM.his", timestamp = F, begintime = "2003-01-01 00:00:00")
+#' dimnames(arr)
+#' submod <- c("Chlfa", "OXY")
+#' locmod <- c("NZR6NW020", "NZR9TS010")
+#' df <- arr2df(arr, locmod=locmod, submod=submod)
+#' df$value[df$variable == "fResptot"] <- -df$value[df$variable == "fResptot"]
+#' library(ggplot2)
+#' plot <- ggplot(df, aes(time, value))
+#' plot +
+#'   geom_line(aes(color = variable), size = 1) +
+#'   geom_point(aes(color = variable), fill = "white",  shape = 21, size = 4) +
+#'   facet_grid((. ~ location))
+#' limmod = c("Limit e", "Limit nit", "Limit pho", "Limit sil")
+#' DelwaqEcoplot(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
+#' DelwaqEcoplot2(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
 DelwaqEcoplot2 <- function (arr, locmod, submod, limmod, plottype) {
 
   #   if () {
@@ -152,7 +190,7 @@ DelwaqEcoplot2 <- function (arr, locmod, submod, limmod, plottype) {
 
   z = ggplot(aes(time, value), data = df.y) +
     #   geom_line(aes(), color = "grey20", size = 0.5) +
-    facet_grid(location ~ .)
+    facet_grid(variable ~ location)
   if(plottype == 1){
     z = z + geom_line(aes(x = time, y = step, color = limitation, size = value), data = df.lim)
   }
