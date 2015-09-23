@@ -4,9 +4,20 @@
 #' @param filename the .his file to be converted.
 #' @return An R array object of the Delwaq .his file named  \code{filename}.
 #' @examples
-#' arr <- his2arr(example.his)
+#' library(DelwaqR)
+#' arr <- his2arr(filename = "DATA/NZBLOOM.his", timestamp = F, begintime = "2003-01-01 00:00:00")
 #' dimnames(arr)
-his2arr <- function(filename){
+#' submod <- c("Chlfa", "OXY")
+#' locmod <- c("NZR6NW020", "NZR9TS010")
+#' df <- arr2df(arr, locmod=locmod, submod=submod)
+#' df$value[df$variable == "fResptot"] <- -df$value[df$variable == "fResptot"]
+#' library(ggplot2)
+#' plot <- ggplot(df, aes(time, value))
+#' plot +
+#'   geom_line(aes(color = variable), size = 1) +
+#'   geom_point(aes(color = variable), fill = "white",  shape = 21, size = 4) +
+#'   facet_grid((. ~ location))
+his2arr <- function(filename, timestamp = T, begintime = "1900-01-01 00:00:00"){
   require("stringr")
   ## Open file in binary mode
   zz <- file(filename, "rb")
@@ -56,9 +67,11 @@ his2arr <- function(filename){
   }
   ## close file connection
   close(zz)
-  ### adapt date names using timeorigin in his file
+  ## adapt date names using timeorigin in his file
   timeorigin <- str_replace_all(timeorigin,"[.]","-")
-  itn2 <- as.character(as.POSIXct(x=as.numeric(itn), origin = timeorigin, tz = "GMT"))
+  ifelse(timestamp,
+         itn2 <- as.character(as.POSIXct(x=as.numeric(itn), origin = timeorigin, tz = "GMT")),
+         itn2 <- as.character(as.POSIXct(x=as.numeric(itn), origin = begintime, tz = "GMT")))
   dimnames(concar) <- list(itn2,str_trim(duname),str_trim(syname))
   return(concar)
 }
@@ -74,9 +87,19 @@ his2arr <- function(filename){
 #' @param submod the substances in the array to be extracted
 #' @return A dataframe with model output values for \code{submod} and \code{locmod}.
 #' @examples
-#' arr <- his2arr(example.his)
-#' df.mod <- arr2df(arr, "location", "substance")
-#' str(df.mod)
+#' library(DelwaqR)
+#' arr <- his2arr(filename = "DATA/NZBLOOM.his", timestamp = F, begintime = "2003-01-01 00:00:00")
+#' dimnames(arr)
+#' submod <- c("Chlfa", "OXY")
+#' locmod <- c("NZR6NW020", "NZR9TS010")
+#' df <- arr2df(arr, locmod=locmod, submod=submod)
+#' df$value[df$variable == "fResptot"] <- -df$value[df$variable == "fResptot"]
+#' library(ggplot2)
+#' plot <- ggplot(df, aes(time, value))
+#' plot +
+#'   geom_line(aes(color = variable), size = 1) +
+#'   geom_point(aes(color = variable), fill = "white",  shape = 21, size = 4) +
+#'   facet_grid((. ~ location))
 arr2df <- function(arr, locmod, submod) {
   require(reshape2)
 
