@@ -1,0 +1,18 @@
+{
+    "contents" : "library(devtools)\ndocument(pkg = \"DelwaqR\")\nfin",
+    "created" : 1442993665603.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2581103475",
+    "id" : "FA9ADC6E",
+    "lastKnownWriteTime" : 7011605692497750387,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

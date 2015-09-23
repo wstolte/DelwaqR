@@ -20,15 +20,22 @@
 ##                                                                         ##
 ##=========================================================================##
 
+#' extract data from array into a dataframe for selected locations and substances,
+#'
+#' @param formulax formula to define the variables for statistics
+#' @param df dataframe with observed and modelled values
+#' @param val_obs the observed variable name
+#' @param val_mod the modelled variable name
+#' @param logtrans(logical) whether to logtransform the data before analysis
+#' @return A dataframe with statistics to plot target diagram
 make.target.table3 <- function (formulax, df, val_obs, val_mod, logtrans = F) {
-
   #   TESTDATA TO RUN THE FUNCTION AS SCRIPT
-#      df = stattable
-#     formulax = ~ variable
-#     val_obs = "value.x"
-#     val_mod = "value.y"
-#      logtrans = F
-#
+  #      df = stattable
+  #     formulax = ~ variable
+  #     val_obs = "value.x"
+  #     val_mod = "value.y"
+  #      logtrans = F
+  #
   require(plyr)
 
   #   ## Do transformation
@@ -43,7 +50,7 @@ make.target.table3 <- function (formulax, df, val_obs, val_mod, logtrans = F) {
     print("log transformation used") }   else {
       print("no transformation")  }
 
-  ## calculate square differences (SD)
+  ## calculate squared differences (SD)
   if(logtrans)  {
     df.summary <- ddply(df, formulax, here(summarise),
                         observed = log(get(val_obs) + 1),
@@ -82,6 +89,13 @@ make.target.table3 <- function (formulax, df, val_obs, val_mod, logtrans = F) {
 #
 # make.target.table2(formulax = ~substance + location, df = df.stat, val_obs = "value.x",val_mod = "value.y")
 
+#' produce dataframe with circle points for plotting
+#' @param center
+#' @param diameter
+#' @param npoints
+#' @return A dataframe with npoints points located on a circle
+
+#' circleFun()
 circleFun <- function(center = c(0,0),diameter = 1, npoints = 100){
   r = diameter / 2
   tt <- seq(0,2*pi,length.out = npoints)

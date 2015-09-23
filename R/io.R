@@ -64,10 +64,10 @@ his2arr <- function(filename){
 }
 
 
-# function arr2df converts array from his2arr function into dataframe with selected
-# substances and locations
+# function arr2df is used to convert an array from the his2arr function
+# into dataframe with selected substances and locations
 
-#' exctract data from array into a dataframe for selected locations and substances,
+#' extract data from array into a dataframe for selected locations and substances,
 #'
 #' @param arr the array to be extracted.
 #' @param locmod the locations in the array to be extracted

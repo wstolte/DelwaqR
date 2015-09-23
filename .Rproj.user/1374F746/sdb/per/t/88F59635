@@ -1,0 +1,16 @@
+{
+    "contents" : "DelwaqR\n========================================================\nauthor: Willem Stolte\ndate:May 2015\n\n```{r load_packages, include=FALSE}\nlibrary(ggplot2)\nlibrary(plyr)\nlibrary(pander)\nlibrary(DelwaqR)\n```\n\nOverview\n========================================================\ngroups of functions\n- io functions\n- statistical functions\n- plot functions\n\n```\ntabel | header1 | header2\n-------------------------\nrow1  | 3.9885  | 5.43\nrow2  | 4.23    | 2384\n```\n\nio functions\n========================================================\nRead *.his file into array\n```{r}\nworkdir <- \"d:\\\\MODELS\\\\ED\\\\\"\nmodversion <- \"eco-scen4-run1-28-y2_2-day\"\nmodarr <- his2arr(paste(workdir, modversion, \".his\", sep = \"\"))\ndim(modarr)\n```\n\nio functions\n========================================================\nConvert array to dataframe\n```{r}\nsubs <- c(\"Chlfa\", \"PO4\")\nlocs = \"WZ590_ZO_Lauwers_oos\"\ndf <- arr2df(modarr, submod = subs, locmod = locs)\nstr(df)\n```\n\nPlot time series\n========================================================\n```{r, echo = F, fig.width = 15}\np <- ggplot(data = df, aes(x = time, y = value, color = variable))\np + geom_point(size = 3) + facet_grid(variable ~ ., scales = \"free\")\n```\nResult for `r locs`\n\nMake Ecoplot\n========================================================\n```{r}\nlimmod = c(\"Limit e\", \"Limit nit\", \"Limit pho\", \"Limit sil\")\nlocations = c(\"WZ590_ZO_Lauwers_oos\")\nDelwaqEcoplot(arr = modarr, locmod = locations, submod = \"fPPtot\", limmod = limmod, plottype = 1)\n```\nResult for `r locations`\nMake Ecoplot (echo = FALSE)\n========================================================\n\n```{r, echo = F, fig.width = 15}\nlimmod = c(\"Limit e\", \"Limit nit\", \"Limit pho\", \"Limit sil\")\nlocations = c(\"WZ590_ZO_Lauwers_oos\")\n(DelwaqEcoplot(arr = modarr, locmod = locations, submod = \"fPPtot\", limmod = limmod, plottype = 1))\n```\nResult for `r locations`\n\nR community\n=========================================================\n- active\n- open source\n- elakvjeioaera\n",
+    "created" : 1432281194992.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2762181784",
+    "id" : "88F59635",
+    "lastKnownWriteTime" : 1432742921,
+    "path" : "D:/GitHubClones/DelwaqR/presentation_test.Rpres",
+    "project_path" : "presentation_test.Rpres",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_presentation"
+}
