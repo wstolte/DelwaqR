@@ -123,7 +123,7 @@ arr2df <- function(arr, locmod, submod) {
     df.mod$variable <- submod
     df.mod$time <- row.names(df.mod)
   }
-  df.mod$time  <- as.POSIXct(x=df.mod$time)
+  df.mod$time  <- as.POSIXct(x=df.mod$time, format = "%Y-%m-%d %H:%M:%S")
   df.mod$location  <- factor(df.mod$location,levels = locmod)
   #df.mod$species   <- factor(df.mod$species, levels = submod)
   return(df.mod)
