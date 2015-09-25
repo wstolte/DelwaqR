@@ -7,14 +7,19 @@ dimnames(arr)
 submod <- c("Chlfa", "OXY")
 locmod <- c("NZR6NW020", "NZR9TS010")
 df <- arr2df(arr, locmod=locmod, submod=submod)
-df$value[df$variable == "fResptot"] <- -df$value[df$variable == "fResptot"]
+# df$value[df$variable == "fResptot"] <- -df$value[df$variable == "fResptot"]
 library(ggplot2)
 plot <- ggplot(df, aes(time, value))
 plot +
   geom_line(aes(color = variable), size = 1) +
   geom_point(aes(color = variable), fill = "white",  shape = 21, size = 4) +
   facet_grid((. ~ location))
-
+library(plyr)
 limmod = c("Limit e", "Limit nit", "Limit pho", "Limit sil")
 DelwaqEcoplot(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
+
+obsarr    <- his2arr(filename = "DATA/mw1984-2001b.his", timestamp = T)
+submod <- c("Chlora_meas")
+locmod <- c("NZR6NW010")
+obsdf <- arr2df(obsarr, locmod=locmod, submod=submod)
 

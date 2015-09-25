@@ -1,8 +1,8 @@
 Package: DelwaqR
-Title: What the package does (one line)
+Title: IO, statistics and plot functions for Delft3D water quality (oss.deltares.nl)
 Version: 0.1
-Authors@R: "First Last <first.last@example.com> [aut, cre]"
-Description: What the package does (one paragraph)
+Authors@R: "Willem Stolte <willem.stolte@deltares.nl>"
+Description: wrapper functions for easy loading of model results, doing statistics and plotting
 Depends:
     R (>= 3.1.2)
 License: What license is it under?
