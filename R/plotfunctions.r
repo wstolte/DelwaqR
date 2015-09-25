@@ -71,7 +71,7 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
   #   if () {
   #     stop("Argument invalid.")
   #   }
-
+library(plyr)
   df.y <- arr2df(arr = arr, locmod = locmod, submod = submod)
 
   lablim = mapvalues(limmod,
@@ -154,6 +154,7 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
 #' DelwaqEcoplot(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
 #' DelwaqEcoplot2(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
 DelwaqEcoplot2 <- function (arr, locmod, submod, limmod, plottype) {
+  library(plyr)
 
   #   if () {
   #     stop("Argument invalid.")
