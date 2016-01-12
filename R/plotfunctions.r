@@ -1,5 +1,4 @@
 
-require(plyr)
 require(reshape2)
 require(ggplot2)
 require(scales)
@@ -12,6 +11,18 @@ require(scales)
 #' @param arr array with model results produced with \code{his2arr}
 #' @return A standard plot of stacked variables
 plotstacked <- function(unit, locmod, submod, arr) {
+
+  #   if(require("lme4")){
+  #     print("lme4 is loaded correctly")
+  #   } else {
+  #     print("trying to install lme4")
+  #     install.packages("lme4")
+  #     if(require(lme4)){
+  #       print("lme4 installed and loaded")
+  #     } else {
+  #       stop("could not install lme4")
+  #     }
+  #   }
 
   df.map <- read.csv("d:/Tools&Scripts/Mapping tables/RWS2DELWAQ2names.csv", header = T, stringsAsFactors=FALSE)
   #   df.map <- read.csv("p:/1205711-edspa/2012waq/metingen/RWS2DELWAQ2names.csv", header = T, stringsAsFactors=FALSE)
@@ -35,6 +46,8 @@ saveseries <- function(plotdir, filename, locname, height) {
   ggsave(file=paste(plotdir,"/", filename,"_",locname,"_area",".png",sep=""),
          width=10,height=height,dpi=300)
 }
+
+
 
 #====================================================================================
 # Ecoplot functionality
@@ -71,7 +84,19 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
   #   if () {
   #     stop("Argument invalid.")
   #   }
-library(plyr)
+
+  if(require("plyr")){
+    print("plyr is loaded correctly")
+  } else {
+    print("trying to install plyr")
+    install.packages("plyr")
+    if(require(plyr)){
+      print("plyr installed and loaded")
+    } else {
+      stop("could not install plyr")
+    }
+  }
+
   df.y <- arr2df(arr = arr, locmod = locmod, submod = submod)
 
   lablim = mapvalues(limmod,
@@ -99,7 +124,9 @@ library(plyr)
   require(scales)
 
   ## define position of annotated text to indicate different limitations
-  annotate.position.x <- as.POSIXct(as.numeric(min(df.lim$time)) - as.numeric(min(df.lim$time))/1200, origin = "1970-01-01 00:00:00")
+  ann.pos.x <- as.POSIXct(as.numeric(min(df.lim$time)) - as.numeric(min(df.lim$time))/1200, origin = "1970-01-01 00:00:00")
+  ann.pos.xs <- rep(ann.pos.x, length(steps))
+df.ann <- data.frame(ann.pos.xs, steps, lablim)
 
   z = ggplot(aes(time, value), data = df.y)
   z = z + geom_line(aes(), color = "grey20", size = 0.5) +
@@ -112,17 +139,16 @@ library(plyr)
     z = z +  geom_line(aes(x = time, y = step, color = limitation, alpha = value), data = df.lim, size = 3)
   }
   #   labs(x = "date", y = paste(y_name, y_unit)) +
-  z =  z +
-    labs(x = "", y = "") +
-    theme(text = element_text(size = 16)) +
-    scale_x_datetime(breaks = date_breaks("2 months"),  minor_breaks = date_breaks("month"), labels = date_format("%b")) +
-    scale_y_continuous(expand = c(0.15,0), breaks = pretty_breaks(n=2)(yy)) +#,
-    #                        labels = comma_format(digits = 1)) +
-    scale_size_continuous(range=c(0,4)) +
-    annotate("text", x = annotate.position.x, y = steps, label = lablim, size = 3) +
-    theme_bw(base_size = 12, base_family = "") +
-    theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+  z =  z + labs(x = "", y = "")
+  z =  z + theme(text = element_text(size = 16))
+  z =  z + scale_x_datetime(breaks = date_breaks("2 months"),  minor_breaks = date_breaks("month"), labels = date_format("%b"))
+  z =  z + scale_y_continuous(expand = c(0.15,0), breaks = pretty_breaks(n=2)(yy))
+  #                        labels = comma_format(digits = 1)) +
+  z =  z + scale_size_continuous(range=c(0,4))
+  z =  z +geom_text( aes(x = ann.pos.xs, y = steps, label = lablim), data = df.ann, size = 3) # gaat fout soms
+  z =  z + theme_bw(base_size = 12, base_family = "")
+  z =  z + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
   z
 }
 
@@ -154,7 +180,18 @@ library(plyr)
 #' DelwaqEcoplot(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
 #' DelwaqEcoplot2(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
 DelwaqEcoplot2 <- function (arr, locmod, submod, limmod, plottype) {
-  library(plyr)
+
+  if(require("plyr")){
+    print("plyr is loaded correctly")
+  } else {
+    print("trying to install plyr")
+    install.packages("plyr")
+    if(require(plyr)){
+      print("plyr installed and loaded")
+    } else {
+      stop("could not install plyr")
+    }
+  }
 
   #   if () {
   #     stop("Argument invalid.")
