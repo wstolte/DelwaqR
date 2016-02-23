@@ -1,6 +1,10 @@
 {
-    "path" : "D:/GitHubClones/DelwaqR/R",
+    "path" : "D:/GitHubClones/DelwaqR",
     "sortOrder" : [
+        {
+            "ascending" : false,
+            "columnIndex" : 4
+        },
         {
             "ascending" : true,
             "columnIndex" : 2

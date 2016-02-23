@@ -249,3 +249,64 @@ DelwaqEcoplot2 <- function (arr, locmod, submod, limmod, plottype) {
           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
   z
 }
+
+
+#` Multiple plot function
+#' plots any number of ggplot objects, (http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_%28ggplot2%29/)
+#' @param plotlist List of plots defines as ggplot objects
+#' @param file ...
+#' @param cols Number of columns for plotting
+#' @param layout Plot layout defined as in the \code{grid::} package
+#' @return A grid with plots
+#' @examples
+#' library(DelwaqR)
+#' arr <- his2arr(filename = "DATA/NZBLOOM.his", timestamp = F, begintime = "2003-01-01 00:00:00")
+#' dimnames(arr)
+#' submod <- c("Chlfa", "OXY")
+#' locmod <- c("NZR6NW020", "NZR9TS010")
+#' df <- arr2df(arr, locmod=locmod, submod=submod)
+#' df$value[df$variable == "fResptot"] <- -df$value[df$variable == "fResptot"]
+#' library(ggplot2)
+#' plot <- ggplot(df, aes(time, value))
+#' plot +
+#'   geom_line(aes(color = variable), size = 1) +
+#'   geom_point(aes(color = variable), fill = "white",  shape = 21, size = 4) +
+#'   facet_grid((. ~ location))
+#' limmod = c("Limit e", "Limit nit", "Limit pho", "Limit sil")
+#' DelwaqEcoplot(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
+#' DelwaqEcoplot2(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+  if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
