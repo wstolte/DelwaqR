@@ -115,7 +115,7 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
   colnames(df.lim) <- mapvalues(colnames(df.lim), from = "variable", to = "limitation")
   df.lim$limitation <-  mapvalues(df.lim$limitation,
                                   c("Limit e", "Limit nit", "Limit pho", "Limit sil", "Limit gro", "Limit mor"),
-                                  c("light", "nitrogen","phophorus","silica","growth", "mortality")
+                                  c("light", "nitrogen","phosphorus","silica","growth", "mortality")
   )
 
 
