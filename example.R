@@ -1,7 +1,7 @@
-library(devtools)
-install_github("wstolte/DelwaqR")
+# library(devtools)
+# install_github("wstolte/DelwaqR")
 
-library(DelwaqR)
+# library(DelwaqR)
 arr <- his2arr(filename = "DATA/NZBLOOM.his", timestamp = F, begintime = "2003-01-01 00:00:00")
 dimnames(arr)
 submod <- c("Chlfa", "OXY")
