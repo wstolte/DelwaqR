@@ -1,11 +1,11 @@
-require(devtools)
-require(DelwaqR)
-require(ggplot2)
-require (caTools)
-require(reshape2)
-require(plyr)
-require(stringr)
-require(scales)
+#require(devtools)
+#require(DelwaqR)
+#require(ggplot2)
+#require (caTools)
+#require(reshape2)
+#require(plyr)
+#require(stringr)
+#require(scales)
 
 moddir<-"p:/1208342-deepbay/Phase_2/DWAQ/runs/"
 plotdir<-"p:/1208342-deepbay/Phase_2/DWAQ/Rplots/Tango/"
