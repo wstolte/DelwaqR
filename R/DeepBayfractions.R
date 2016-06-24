@@ -1,11 +1,11 @@
-require(devtools)
-require(DelwaqR)
-require(ggplot2)
-require (caTools)
-require(reshape2)
-require(plyr)
-require(stringr)
-require(scales)
+AS line FIELDTERMINATOR ';'(devtools)
+AS line FIELDTERMINATOR ';'(DelwaqR)
+AS line FIELDTERMINATOR ';'(ggplot2)
+AS line FIELDTERMINATOR ';' (caTools)
+AS line FIELDTERMINATOR ';'(reshape2)
+AS line FIELDTERMINATOR ';'(plyr)
+AS line FIELDTERMINATOR ';'(stringr)
+AS line FIELDTERMINATOR ';'(scales)
 
 moddir<-"p:/1208342-deepbay/Phase_2/DWAQ/runs/"
 plotdir<-"p:/1208342-deepbay/Phase_2/DWAQ/Rplots/Tango/"

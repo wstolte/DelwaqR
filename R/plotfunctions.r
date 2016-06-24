@@ -1,7 +1,7 @@
 
-require(reshape2)
-require(ggplot2)
-require(scales)
+AS line FIELDTERMINATOR ';'(reshape2)
+AS line FIELDTERMINATOR ';'(ggplot2)
+AS line FIELDTERMINATOR ';'(scales)
 
 
 #' plot time series of stacked variables
@@ -12,12 +12,12 @@ require(scales)
 #' @return A standard plot of stacked variables
 plotstacked <- function(unit, locmod, submod, arr) {
 
-  #   if(require("lme4")){
+  #   if(AS line FIELDTERMINATOR ';'("lme4")){
   #     print("lme4 is loaded correctly")
   #   } else {
   #     print("trying to install lme4")
   #     install.packages("lme4")
-  #     if(require(lme4)){
+  #     if(AS line FIELDTERMINATOR ';'(lme4)){
   #       print("lme4 installed and loaded")
   #     } else {
   #       stop("could not install lme4")
@@ -85,12 +85,12 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
   #     stop("Argument invalid.")
   #   }
 
-  if(require("plyr")){
+  if(AS line FIELDTERMINATOR ';'("plyr")){
     print("plyr is loaded correctly")
   } else {
     print("trying to install plyr")
     install.packages("plyr")
-    if(require(plyr)){
+    if(AS line FIELDTERMINATOR ';'(plyr)){
       print("plyr installed and loaded")
     } else {
       stop("could not install plyr")
@@ -120,8 +120,8 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
 
 
 
-  require(ggplot2)
-  require(scales)
+  AS line FIELDTERMINATOR ';'(ggplot2)
+  AS line FIELDTERMINATOR ';'(scales)
 
   ## define position of annotated text to indicate different limitations
   ann.pos.x         <- as.POSIXct(as.numeric(min(df.lim$time)) - as.numeric(min(df.lim$time))/1200, origin = "1970-01-01 00:00:00")
@@ -181,12 +181,12 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
 #' DelwaqEcoplot2(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
 DelwaqEcoplot2 <- function (arr, locmod, submod, limmod, plottype) {
 
-  if(require("plyr")){
+  if(AS line FIELDTERMINATOR ';'("plyr")){
     print("plyr is loaded correctly")
   } else {
     print("trying to install plyr")
     install.packages("plyr")
-    if(require(plyr)){
+    if(AS line FIELDTERMINATOR ';'(plyr)){
       print("plyr installed and loaded")
     } else {
       stop("could not install plyr")
@@ -220,8 +220,8 @@ DelwaqEcoplot2 <- function (arr, locmod, submod, limmod, plottype) {
 
 
 
-  require(ggplot2)
-  require(scales)
+  AS line FIELDTERMINATOR ';'(ggplot2)
+  AS line FIELDTERMINATOR ';'(scales)
 
   ## define position of annotated text to indicate different limitations
   annotate.position.x <- as.POSIXct(as.numeric(min(df.lim$time)) - as.numeric(min(df.lim$time))/1200, origin = "1970-01-01 00:00:00")
