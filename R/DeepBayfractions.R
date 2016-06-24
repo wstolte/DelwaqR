@@ -1,22 +1,12 @@
-<<<<<<< HEAD
-AS line FIELDTERMINATOR ';'(devtools)
-AS line FIELDTERMINATOR ';'(DelwaqR)
-AS line FIELDTERMINATOR ';'(ggplot2)
-AS line FIELDTERMINATOR ';' (caTools)
-AS line FIELDTERMINATOR ';'(reshape2)
-AS line FIELDTERMINATOR ';'(plyr)
-AS line FIELDTERMINATOR ';'(stringr)
-AS line FIELDTERMINATOR ';'(scales)
-=======
-#require(devtools)
-#require(DelwaqR)
-#require(ggplot2)
-#require (caTools)
-#require(reshape2)
-#require(plyr)
-#require(stringr)
-#require(scales)
->>>>>>> origin/master
+library(devtools)
+library(DelwaqR)
+library(ggplot2)
+library (caTools)
+library(reshape2)
+library(plyr)
+library(stringr)
+library(scales)
+
 
 moddir<-"p:/1208342-deepbay/Phase_2/DWAQ/runs/"
 plotdir<-"p:/1208342-deepbay/Phase_2/DWAQ/Rplots/Tango/"
@@ -63,15 +53,15 @@ write.csv(s13Nex,"p:/1208342-deepbay/Phase_2/DWAQ/scenarios/tracers/2013N_extend
 
 
 theme_set(theme_bw(15))
-ggplot(s13Nex,aes(location,sum,fill=frac))+ 
+ggplot(s13Nex,aes(location,sum,fill=frac))+
   geom_bar(stat = "identity")+
   scale_fill_brewer(palette="Accent")+
   #facet_wrap(~season)+
   labs(y="mg N/l",title="2013 nitrogen")+
 theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))
 
-ggsave(file=paste(plotdir,"2013N.png",sep=""),  width=8,height=6,dpi=300)   
-ggsave(file=paste(plotdir,"2013Next.png",sep=""),  width=15,height=5,dpi=300) 
+ggsave(file=paste(plotdir,"2013N.png",sep=""),  width=8,height=6,dpi=300)
+ggsave(file=paste(plotdir,"2013Next.png",sep=""),  width=15,height=5,dpi=300)
 
 Mod2013P<-arr2df(Mod2013,locmod=loc,submod=subP)
 Mod2013P$season <- ifelse(Mod2013P$time >= as.POSIXct("2013-05-01 00:00:00") & Mod2013P$time < as.POSIXct("2013-09-01 00:00:00") , "wet", "dry")
@@ -86,9 +76,9 @@ s2013P$frac<-mapvalues(as.character(s2013P$frac),c("1","2","3","4","5"), c("Init
 write.csv(s2013P,"p:/1208342-deepbay/Phase_2/DWAQ/scenarios/tracers/2013P.csv")
 
 theme_set(theme_bw(15))
-ggplot(s2013P,aes(location,sum,fill=frac))+ 
+ggplot(s2013P,aes(location,sum,fill=frac))+
   geom_bar(stat = "identity")+
   scale_fill_brewer(palette="Accent")+
   facet_wrap(~season)+
   labs(y="mg P/l",title="2013 phosphorus")
-ggsave(file=paste(plotdir,"2013P.png",sep=""),  width=8,height=6,dpi=300)   
+ggsave(file=paste(plotdir,"2013P.png",sep=""),  width=8,height=6,dpi=300)
