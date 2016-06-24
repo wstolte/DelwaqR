@@ -20,28 +20,17 @@
 ##                                                                         ##
 ##=========================================================================##
 
-#' extract data from array into a dataframe for selected locations and substances,
+#' produce summary statistics from dataframe with matching measured and modelled values
 #'
 #' @param formulax formula to define the variables for statistics
 #' @param df dataframe with observed and modelled values
 #' @param val_obs the observed variable name
 #' @param val_mod the modelled variable name
 #' @param logtrans(logical) whether to logtransform the data before analysis
-#' @return A dataframe with statistics to plot target diagram
+#' @return A dataframe with statistics (normalized unbiased RMSD and normalized BIAS) to plot target diagram
 #' @examples
 #' library(DelwaqR)
-#' arr <- his2arr(filename = "DATA/NZBLOOM.his", timestamp = F, begintime = "2003-01-01 00:00:00")
-#' dimnames(arr)
-#' submod <- c("Chlfa", "OXY")
-#' locmod <- c("NZR6NW020", "NZR9TS010")
-#' df <- arr2df(arr, locmod=locmod, submod=submod)
-#' df$value[df$variable == "fResptot"] <- -df$value[df$variable == "fResptot"]
-#' library(ggplot2)
-#' plot <- ggplot(df, aes(time, value))
-#' plot +
-#'   geom_line(aes(color = variable), size = 1) +
-#'   geom_point(aes(color = variable), fill = "white",  shape = 21, size = 4) +
-#'   facet_grid((. ~ location))
+#' make.target.table3(~ substance + location + season, df.statii, "value.x", "value.y", logtrans = F)
 make.target.table3 <- function (formulax, df, val_obs, val_mod, logtrans = F) {
   #   TESTDATA TO RUN THE FUNCTION AS SCRIPT
   #      df = stattable

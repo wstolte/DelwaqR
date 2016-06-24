@@ -109,10 +109,10 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
 
   #======= make dataframe for plotting ecoplot
 
-  yy = range(ceiling(df.y$value*10)/10, na.rm = T)
-  steps <- seq(-yy[2]/10, -length(limmod)*yy[2]/10, by= -yy[2]/10)
-  df.lim$step <- steps[as.numeric(as.factor(df.lim$variable))]
-  colnames(df.lim) <- mapvalues(colnames(df.lim), from = "variable", to = "limitation")
+  yy                <- range(ceiling(df.y$value*10)/10, na.rm = T)
+  steps             <- seq(-yy[2]/10, -length(limmod)*yy[2]/10, by= -yy[2]/10)
+  df.lim$step       <- steps[as.numeric(as.factor(df.lim$variable))]
+  colnames(df.lim)  <- mapvalues(colnames(df.lim), from = "variable", to = "limitation")
   df.lim$limitation <-  mapvalues(df.lim$limitation,
                                   c("Limit e", "Limit nit", "Limit pho", "Limit sil", "Limit gro", "Limit mor"),
                                   c("light", "nitrogen","phophorus","silica","growth", "mortality")
@@ -124,31 +124,31 @@ DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
   require(scales)
 
   ## define position of annotated text to indicate different limitations
-  ann.pos.x <- as.POSIXct(as.numeric(min(df.lim$time)) - as.numeric(min(df.lim$time))/1200, origin = "1970-01-01 00:00:00")
-  ann.pos.xs <- rep(ann.pos.x, length(steps))
-df.ann <- data.frame(ann.pos.xs, steps, lablim)
+  ann.pos.x         <- as.POSIXct(as.numeric(min(df.lim$time)) - as.numeric(min(df.lim$time))/1200, origin = "1970-01-01 00:00:00")
+  ann.pos.xs        <- rep(ann.pos.x, length(steps))
+  df.ann            <- data.frame(ann.pos.xs, steps, lablim)
 
-  z = ggplot(aes(time, value), data = df.y)
-  z = z + geom_line(aes(), color = "grey20", size = 0.5) +
+  z   <- ggplot(aes(time, value), data = df.y)
+  z   <- z + geom_line(aes(), color = "grey20", size = 0.5) +
     facet_grid(variable ~ location)
   # facet_wrap( ~ location)
   if(plottype == 1){
-    z = z + geom_line(aes(x = time, y = step, color = limitation, size = value), data = df.lim)
+    z <- z + geom_line(aes(x = time, y = step, color = limitation, size = value), data = df.lim)
   }
   if(plottype == 2) {
-    z = z +  geom_line(aes(x = time, y = step, color = limitation, alpha = value), data = df.lim, size = 3)
+    z <- z +  geom_line(aes(x = time, y = step, color = limitation, alpha = value), data = df.lim, size = 3)
   }
   #   labs(x = "date", y = paste(y_name, y_unit)) +
-  z =  z + labs(x = "", y = "")
-  z =  z + theme(text = element_text(size = 16))
-  z =  z + scale_x_datetime(breaks = date_breaks("2 months"),  minor_breaks = date_breaks("month"), labels = date_format("%b"))
-  z =  z + scale_y_continuous(expand = c(0.15,0), breaks = pretty_breaks(n=2)(yy))
+  z <-  z + labs(x = "", y = "")
+  z <-  z + theme(text = element_text(size = 16))
+  z <-  z + scale_x_datetime(breaks = date_breaks("2 months"),  minor_breaks = date_breaks("month"), labels = date_format("%b"))
+  z <-  z + scale_y_continuous(expand = c(0.15,0), breaks = pretty_breaks(n=2)(yy))
   #                        labels = comma_format(digits = 1)) +
-  z =  z + scale_size_continuous(range=c(0,4))
-  z =  z +geom_text( aes(x = ann.pos.xs, y = steps, label = lablim), data = df.ann, size = 3) # gaat fout soms
-  z =  z + theme_bw(base_size = 12, base_family = "")
-  z =  z + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+  z <-  z + scale_size_continuous(range=c(0,4))
+  z <-  z +geom_text( aes(x = ann.pos.xs, y = steps, label = lablim), data = df.ann, size = 3) # gaat fout soms
+  z <-  z + theme_bw(base_size = 12, base_family = "")
+  z <-  z + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                 panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
   z
 }
 
