@@ -25,8 +25,6 @@ his2arr<- function (filename, timestamp = T, begintime = "1900-01-01 00:00:00")
     stop("filename does not seem to be a <.his> file")
   }
 
-  filename <- "DATA/NZBLOOM.his"
-
   zz <- file(filename, "rb")
   readChar(zz, 40)
   readChar(zz, 40)
