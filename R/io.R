@@ -19,7 +19,7 @@
 #'   facet_grid((. ~ location))
 his2arr<- function (filename, timestamp = T, begintime = "1900-01-01 00:00:00")
 {
-  AS line FIELDTERMINATOR ';'("stringr")
+  library("stringr")
   if (substr(filename, nchar(filename) - 3, nchar(filename)) !=
       ".his") {
     stop("filename does not seem to be a <.his> file")
@@ -113,7 +113,7 @@ his2arr<- function (filename, timestamp = T, begintime = "1900-01-01 00:00:00")
 #'   geom_point(aes(color = variable), fill = "white",  shape = 21, size = 4) +
 #'   facet_grid((. ~ location))
 arr2df <- function(arr, locmod, submod) {
-  AS line FIELDTERMINATOR ';'(reshape2)
+  library(reshape2)
 
   #   df.map <- read.csv2("d:/Tools_Scripts/Mapping tables/RWS2DELWAQ2names.csv", header = T, stringsAsFactors=FALSE)
   #   df.map <- read.csv("p:/1205711-edspa/2012waq/metingen/RWS2DELWAQ2names.csv", header = T, stringsAsFactors=FALSE)
@@ -164,8 +164,8 @@ saveseries <- function(plotdir, filename, locname, height, plottype) {
 #' @return dataframe with available mwtl measurements
 
 DF_MWTL_NCDF <- function(substance_mwtl,list_locations_mwtl,workdir){
-  AS line FIELDTERMINATOR ';'("ncdf")
-  AS line FIELDTERMINATOR ';'("chron")
+  library("ncdf")
+  library("chron")
 
   file_name = substance_mwtl
   list_locations = list_locations_mwtl
