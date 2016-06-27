@@ -25,7 +25,7 @@ plot time series variable with limiting factors
 }
 \examples{
 library(DelwaqR)
-arr <- his2arr(filename = "DATA/NZBLOOM.his", timestamp = F, begintime = "2003-01-01 00:00:00")
+arr <- his2arr(filename = "extdata/NZBLOOM.his", timestamp = F, begintime = "2003-01-01 00:00:00")
 dimnames(arr)
 submod <- c("Chlfa", "OXY")
 locmod <- c("NZR6NW020", "NZR9TS010")
