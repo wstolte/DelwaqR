@@ -1,12 +1,11 @@
 library(devtools)
-library(DelwaqR)
 library(ggplot2)
 library (caTools)
 library(reshape2)
 library(plyr)
 library(stringr)
 library(scales)
-
+##library(DelwaqR)
 
 moddir<-"p:/1208342-deepbay/Phase_2/DWAQ/runs/"
 plotdir<-"p:/1208342-deepbay/Phase_2/DWAQ/Rplots/Tango/"
