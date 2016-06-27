@@ -17,11 +17,9 @@
 #'   geom_line(aes(color = variable), size = 1) +
 #'   geom_point(aes(color = variable), fill = "white",  shape = 21, size = 4) +
 #'   facet_grid((. ~ location))
-his2arr<- function (filename, timestamp = T, begintime = "1900-01-01 00:00:00")
-{
+his2arr <- function (filename, timestamp = T, begintime = "1900-01-01 00:00:00"){
   library("stringr")
-  if (substr(filename, nchar(filename) - 3, nchar(filename)) !=
-      ".his") {
+  if (substr(filename, nchar(filename) - 3, nchar(filename)) !=".his") {
     stop("filename does not seem to be a <.his> file")
   }
 
@@ -73,9 +71,7 @@ his2arr<- function (filename, timestamp = T, begintime = "1900-01-01 00:00:00")
   concar <- array(dim = c(length(itn), afm[2], afm[1]))
   for (i in 1:length(itn)) {
     it <- readBin(zz, integer(), n = 1)
-    concar[i, , ] <- matrix(readBin(zz, "double", n = afm[1] *
-                                      afm[2], size = 4), nrow = afm[2], ncol = afm[1],
-                            byrow = T)
+    concar[i, , ] <- matrix(readBin(zz, "double", n = afm[1] * afm[2], size = 4), nrow = afm[2], ncol = afm[1], byrow = T)
   }
   close(zz)
   timeorigin <- str_replace_all(timeorigin, "[.]", "-")
@@ -137,8 +133,8 @@ arr2df <- function(arr, locmod, submod) {
   }
 
   ifelse(nchar(as.character(df.mod$time[1])) < 19,
-  df.mod$time  <- as.POSIXct(x=df.mod$time, format = "%Y-%m-%d"),
-  df.mod$time  <- as.POSIXct(x=df.mod$time, format = "%Y-%m-%d %H:%M:%S")
+         df.mod$time  <- as.POSIXct(x=df.mod$time, format = "%Y-%m-%d"),
+         df.mod$time  <- as.POSIXct(x=df.mod$time, format = "%Y-%m-%d %H:%M:%S")
   )
   df.mod$location  <- factor(df.mod$location,levels = locmod)
   #df.mod$species   <- factor(df.mod$species, levels = submod)
