@@ -39,7 +39,7 @@ make.target.table3 <- function (formulax, df, val_obs, val_mod, logtrans = F) {
   #     val_mod = "value.y"
   #      logtrans = F
   #
-  AS line FIELDTERMINATOR ';'(plyr)
+  library(plyr)
 
   #   ## Do transformation
   #   if(logtrans) {
