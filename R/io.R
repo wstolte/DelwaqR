@@ -19,7 +19,7 @@
 #'   facet_grid((. ~ location))
 his2arr <- function (filename, timestamp = T, begintime = "1900-01-01 00:00:00"){
   library("stringr")
-  if (substr(filename, nchar(filename) - 3, nchar(filename)) !=".his") {
+  if (toupper(substr(filename, nchar(filename) - 3, nchar(filename))) !=".HIS") {
     stop("filename does not seem to be a <.his> file")
   }
 
