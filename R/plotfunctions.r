@@ -49,12 +49,10 @@ saveseries <- function(plotdir, filename, locname, height) {
 
 
 
-#====================================================================================
 # Ecoplot functionality
 # plots output variable (often fPPtot)
 # and limiting factors in colored lines at the bottom
 # author: Willem Stolte
-#====================================================================================
 
 #' plot time series variable with limiting factors
 #' @param arr array with model results produced with \code{his2arr}
