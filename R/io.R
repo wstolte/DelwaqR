@@ -151,6 +151,10 @@ saveseries <- function(plotdir, filename, locname, height, plottype) {
 ######Read Data#######################
 
 
+
+
+
+
 ############################################################
 #' Read MWTL NetCDF and convert it to a Dataframe
 #'
@@ -298,4 +302,8 @@ ReadCSVMWTLFormat <- function(csv_file, name_file){
 
   return(corr_csv_file)
 }
+
+
+
+
 
