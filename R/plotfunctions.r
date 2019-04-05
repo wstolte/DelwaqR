@@ -78,75 +78,104 @@ saveseries <- function(plotdir, filename, locname, height) {
 #' limmod = c("Limit e", "Limit nit", "Limit pho", "Limit sil")
 #' DelwaqEcoplot(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
 #' DelwaqEcoplot2(arr = arr, locmod = locmod, submod = submod, limmod = limmod, plottype = 1)
-DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype) {
-  #   if () {
-  #     stop("Argument invalid.")
-  #   }
-
-  if(require("plyr")){
-    print("plyr is loaded correctly")
-  } else {
-    print("trying to install plyr")
-    install.packages("plyr")
-    if(require(plyr)){
-      print("plyr installed and loaded")
-    } else {
-      stop("could not install plyr")
-    }
-  }
-
-  df.y <- arr2df(arr = arr, locmod = locmod, submod = submod)
-
-  lablim = mapvalues(limmod,
-                     c("Limit e", "Limit nit", "Limit pho", "Limit sil", "Limit gro", "Limit mor"),
-                     c("L", "N","P","Si","gro", "mor")
-  )
-
-  df.lim <- arr2df(arr, locmod, limmod)
-  df.lim$variable <- factor(df.lim$variable)
-
-  #======= make dataframe for plotting ecoplot
-
-  yy                <- range(ceiling(df.y$value*10)/10, na.rm = T)
-  steps             <- seq(-yy[2]/10, -length(limmod)*yy[2]/10, by= -yy[2]/10)
-  df.lim$step       <- steps[as.numeric(as.factor(df.lim$variable))]
-  colnames(df.lim)  <- mapvalues(colnames(df.lim), from = "variable", to = "limitation")
-  df.lim$limitation <-  mapvalues(df.lim$limitation,
-                                  c("Limit e", "Limit nit", "Limit pho", "Limit sil", "Limit gro", "Limit mor"),
-                                  c("light", "nitrogen","phosphorus","silica","growth", "mortality")
-  )
-
-
-
-  library(ggplot2)
+DelwaqEcoplot <- function (arr, locmod, submod, limmod, plottype, dailyaverage = T) {
+  require(tidyverse)
   library(scales)
-
-  ## define position of annotated text to indicate different limitations
-  ann.pos.x         <- as.POSIXct(as.numeric(min(df.lim$time)) - as.numeric(min(df.lim$time))/1200, origin = "1970-01-01 00:00:00")
-  ann.pos.xs        <- rep(ann.pos.x, length(steps))
-  df.ann            <- data.frame(ann.pos.xs, steps, lablim)
-
-  z   <- ggplot(aes(time, value), data = df.y)
-  z   <- z + geom_line(aes(), color = "grey20", size = 0.5) +
-    facet_grid(variable ~ location)
-  # facet_wrap( ~ location)
-  if(plottype == 1){
-    z <- z + geom_line(aes(x = time, y = step, color = limitation, size = value), data = df.lim)
+  df.y <- DelwaqR::arr2df(arr = arr, locmod = locmod, submod = submod)
+  if(dailyaverage){
+    df.y <- df.y %>%
+      dplyr::mutate(time = as.Date(time)) %>%
+      dplyr::group_by(time, variable, location) %>%
+      dplyr::summarize(value = mean(value))}
+  df.y$time <- as.POSIXct(df.y$time)
+  labelkey <- list("LimDLGreen" = "DL",
+                   "LimNutGree"  = "Nut",
+                   "LimRadGree"  = "L",
+                   "LimDLdiat"   = "DL",
+                   "LimNutDiat"  = "Nut",
+                   "LimRadDiat"  = "L",
+                   "LimNgreen"  = "N",
+                   "LimPgreen"   = "P",
+                   "LimSigreen"  = "Si",
+                   "LimNdiat"    = "N",
+                   "LimPdiat"    = "P",
+                   "LimSidiat"  = "Si",
+                   "Limit e"  = "L",
+                   "Limit nit"  = "N",
+                   "Limit pho"  = "P",
+                   "Limit sil"  = "Si",
+                   "Limit gro"  = "Gro",
+                   "Limit mor" = "Mor"
+  )
+  lablim = dplyr::recode(limmod, !!!labelkey)
+  df.lim <- DelwaqR::arr2df(arr, locmod, limmod)
+  dynamonames <- c("LimDLGreen","LimNutGree", "LimRadGree", "LimDLdiat", "LimNutDiat", "LimRadDiat" , "LimNgreen",
+                   "LimPgreen", "LimSigreen", "LimNdiat", "LimPdiat", "LimSidiat")
+  bloomnames <- c("Limit e", "Limit nit", "Limit pho", "Limit sil", "Limit gro", "Limit mor")
+  df.lim <- df.lim %>%
+    dplyr::mutate(value = dplyr::case_when(
+      .$variable %in% dynamonames ~ 1 - .$value,
+      .$variable %in% bloomnames ~ .$value)
+    )
+  df.lim$variable <- factor(df.lim$variable)
+  # colnames(df.lim) <- mapvalues(colnames(df.lim), from = "variable",
+  #                               to = "limitation")
+  colnames(df.lim) <- dplyr::recode(colnames(df.lim), variable = "limitation")
+  limitationkey <- list("LimDLGreen" = "daylength",
+                        "LimNutGree" = "nutrient",
+                        "LimRadGree" = "light",
+                        "LimDLdiat" = "daylength",
+                        "LimNutDiat" = "nutrient",
+                        "LimRadDiat" = "light",
+                        "LimNgreen" = "nitrogen",
+                        "LimPgreen" = "phosphorus",
+                        "LimSigreen" = "silica",
+                        "LimNdiat" = "nitrogen",
+                        "LimPdiat" = "phosphorus",
+                        "LimSidiat" = "silica",
+                        "Limit e" = "light",
+                        "Limit nit" = "nitrogen",
+                        "Limit pho" = "phosphorus",
+                        "Limit sil" = "silica",
+                        "Limit gro" = "growth",
+                        "Limit mor" = "mortality"
+  )
+  df.lim$limitation <- dplyr::recode(df.lim$limitation, !!!limitationkey)
+  if(dailyaverage){
+    df.lim <- df.lim %>%
+      dplyr::mutate(time = as.Date(time)) %>%
+      dplyr::group_by(time, limitation, location) %>%
+      dplyr::summarize(value = mean(value))}
+  df.lim$time <- as.POSIXct(df.lim$time)
+  yy <- range(ceiling(df.y$value * 10)/10, na.rm = T)
+  steps <- seq(-yy[2]/10, -length(limmod) * yy[2]/10, by = -yy[2]/10)
+  df.lim$step <- steps[as.numeric(as.factor(df.lim$limitation))]
+  ann.pos.x <- as.POSIXct(as.numeric(min(df.lim$time)) - as.numeric(min(df.lim$time))/1200,
+                          origin = "1970-01-01 00:00:00")
+  ann.pos.xs <- rep(ann.pos.x, length(steps))
+  df.ann <- data.frame(ann.pos.xs, steps, lablim)
+  z <- ggplot2::ggplot(aes(time, value), data = df.y)
+  z <- z + ggplot2::geom_line(aes(), color = "grey20", size = 0.5)
+  if (plottype == 1) {
+    z <- z + ggplot2::geom_line(aes(x = time, y = step, color = limitation,
+                                    size = value), data = df.lim)
   }
-  if(plottype == 2) {
-    z <- z +  geom_line(aes(x = time, y = step, color = limitation, alpha = value), data = df.lim, size = 3)
+  if (plottype == 2) {
+    z <- z + ggplot2::geom_line(aes(x = time, y = step, color = limitation,
+                                    alpha = value), data = df.lim, size = 3)
   }
-  #   labs(x = "date", y = paste(y_name, y_unit)) +
-  z <-  z + labs(x = "", y = "")
-  z <-  z + theme(text = element_text(size = 16))
-  z <-  z + scale_x_datetime(breaks = date_breaks("2 months"),  minor_breaks = date_breaks("month"), labels = date_format("%b"))
-  z <-  z + scale_y_continuous(expand = c(0.15,0), breaks = pretty_breaks(n=2)(yy))
-  #                        labels = comma_format(digits = 1)) +
-  z <-  z + scale_size_continuous(range=c(0,4))
-  z <-  z +geom_text( aes(x = ann.pos.xs, y = steps, label = lablim), data = df.ann, size = 3) # gaat fout soms
-  z <-  z + theme_bw(base_size = 12, base_family = "")
-  z <-  z + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-                 panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+  z <- z + ggplot2::facet_grid(location ~ variable)
+  z <- z + ggplot2::labs(x = "", y = "")
+  z <- z + ggplot2::theme(text = element_text(size = 16))
+  z <- z + ggplot2::scale_x_datetime(breaks = date_breaks("2 months"),
+                                     minor_breaks = date_breaks("month"), labels = date_format("%b"))
+  z <- z + ggplot2::scale_y_continuous(expand = c(0.15, 0), breaks = pretty_breaks(n = 2)(yy))
+  z <- z + ggplot2::scale_size_continuous(range = c(0, 4))
+  z <- z + ggplot2::geom_text(aes(x = ann.pos.xs, y = steps, label = lablim),
+                              data = df.ann, size = 3)
+  z <- z + ggplot2::theme_bw(base_size = 12, base_family = "")
+  z <- z + ggplot2::theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                          panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
   z
 }
 
@@ -235,7 +264,7 @@ DelwaqEcoplot2 <- function (arr, locmod, submod, limmod, plottype) {
   }
   #   labs(x = "date", y = paste(y_name, y_unit)) +
   z =  z +
-    labs(x = "", y = "") +
+    # labs(x = "", y = "") +
     theme(text = element_text(size = 16)) +
     scale_x_datetime(breaks = date_breaks("2 months"),  minor_breaks = date_breaks("month"), labels = date_format("%b")) +
     scale_y_continuous(expand = c(0.15,0), breaks = pretty_breaks(n=2)(yy)) +#,
