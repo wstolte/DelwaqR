@@ -1,4 +1,3 @@
-require("stringr")
 
 # function OpenMapFile
 # opens the file, reads the header and some constants (including the names of the substances)
@@ -12,6 +11,7 @@ require("stringr")
 #' @return A dataframe with header and some constants of \code{filename}.
 #' @examples
 OpenMapFile<-function(filename){
+  require("stringr")
   # prepare the list of file characteristics. Most are NA at this moment, only file type
   # and file name are known
   MFS<-list(FileType="map",FileName=filename,ByteOrder=NA,FormatType=NA,Header=NA,T0=NA,
@@ -75,6 +75,7 @@ OpenMapFile<-function(filename){
 #' @return A matrix with model map output values for \code{MFS}.
 #' @examples
 ReadMapFile<-function(MFS,Subs=seq(1,MFS$NumSubs),HSegms=seq(1,MFS$NumSegm/MFS$NumLay),VSegms=seq(1,MFS$NumLay),Time=1){
+  require("stringr")
   BotLay=(VSegms==c(MFS$NumLay))
   # re-open the file, based on the file name
   zz<-file(MFS$FileName,"rb")
