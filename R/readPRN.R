@@ -95,6 +95,20 @@ read_prn_data <- function(metadf, all_data, myType, myLocation, mySubstance, sum
 }
 
 
+#' read selected data into dataframe from prn balance file
+#' @param filename the balance file to be read (*.prn)
+#' @param myType type of balance ("DUMPAREA", "SURFACE", "VOLUME")
+#' @param myLocation vector of monitoring points or areas from metadata
+#' @param mySubstance vector of substances from metadata
+#' @return A dataframe containg all balances
+read_prn_balances <- function(filename, myType, myLocation, mySubstance) {
+  if(!grepl(".prn", filename)) {stop; print("file is not a *.prn file")}
+  require(tidyverse)
+  metadata <- read_balance_prn_metadata(filename)
+  alldata <- read_prn_all(filename)
+  balance <- read_prn_data(metadata, alldata, myType, myLocation, mySubstance)
+  return(balance)
+}
 
 plotFluxes <- function(prn_data){
   require(ggplot2)
