@@ -55,6 +55,7 @@ read_prn_data <- function(metadf, all_data, myType, myLocation, mySubstance, sum
   require(tidyverse)
   if(!grepl(".prn", filename)) {stop; print("file is not a *.prn file")}
   selection <- metadf %>%
+    mutate(location = trimws(location), substance = trimws(substance)) %>%
     dplyr::filter(massBalanceType %in% myType, location %in% myLocation, substance %in% mySubstance)
 
   sel <- split(selection, seq(nrow(selection)))
