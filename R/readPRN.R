@@ -89,7 +89,7 @@ read_prn_data <- function(metadf, all_data, myType, myLocation, mySubstance, sum
   }
   res <-  res %>%
     bind_rows() %>%
-    mutate(process = str_split(string = process, pattern = "_", simplify = T)[,2])
+    mutate(process = str_split(string = process, pattern = " _", simplify = T)[,2])
 
   return(res)
 }
